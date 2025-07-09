@@ -1,0 +1,59 @@
+---
+title: "Usage"
+---
+
+## Running the SDK Proxy[​](#running-the-sdk-proxy "Direct link to Running the SDK Proxy")
+
+For a quick setup and test environment, the proxy only requires a single environment variable to be set; `DVC_LB_PROXY_SDK_KEY`. This key is used to authenticate to the CDN and Events API. You can alternatively pass in a full configured file instead of the environment variables via the `-c` flag.
+
+Once the environment variable has been set - start the proxy binary.
+
+```
+devcycle-local-bucketing-proxy
+```
+
+At this point the proxy is live and ready to accept requests from any SDK that is supported. By default a TCP server will be started on `localhost:8080`.
+
+# SDK Configuration
+
+Currently only Server SDKs are supported. The default configuration of the proxy will run at `localhost:8080` in HTTP TCP mode. Not all SDKs are configured the same way. Please see the SDK documentation for specific configuration instructions.
+
+Sample configurations for each SDK verified to work with the proxy are below. In a production environment, the configured hostnames should be changed to reflect the real hostname of the proxy.
+
+## PHP SDK Configuration[​](#php-sdk-configuration "Direct link to PHP SDK Configuration")
+
+### HTTP Socket Configuration[​](#http-socket-configuration "Direct link to HTTP Socket Configuration")
+
+```
+use DevCycle\Model\DevCycleOptions;$options = new DevCycleOptions(    enableEdgeDB: false,     bucketingApiHostname = "hostname for sdk proxy here");
+```
+
+### Unix Socket Configuration[​](#unix-socket-configuration "Direct link to Unix Socket Configuration")
+
+```
+use DevCycle\Model\DevCycleOptions;$options = new DevCycleOptions(    enableEdgeDB: false,     bucketingApiHostname: "http:/localhost",    unixSocketPath: "/path/to/unix/socket");
+```
+
+## Python SDK Configuration[​](#python-sdk-configuration "Direct link to Python SDK Configuration")
+
+```
+from devcycle_python_sdk import DevCycleLocalOptionsoptions = DevCycleLocalOptions(config_cdn_uri = "http://localhost:8080/", events_api_uri = "http://localhost:8080/")
+```
+
+## C# SDK Configuration[​](#c-sdk-configuration "Direct link to C# SDK Configuration")
+
+### Local Bucketing[​](#local-bucketing "Direct link to Local Bucketing")
+
+```
+using DevCycle.SDK.Server.Common.Model.Local;var options = new DevCycleLocalOptions                { CdnUri = "http://localhost:8080/", EventsApiUri = "http://localhost:8080/" };
+```
+
+### Cloud Bucketing[​](#cloud-bucketing "Direct link to Cloud Bucketing")
+
+```
+using DevCycle.SDK.Server.Common.API;var restOptions = new DevCycleRestClientOptions { BaseUrl = new Uri("http://localhost:8080/") };
+```
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/sdk/sdk-proxy/usage.md)
+
+Last updated on **Jul 9, 2025**

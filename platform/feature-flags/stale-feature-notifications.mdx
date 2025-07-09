@@ -1,0 +1,127 @@
+---
+title: "Stale Feature Notifications"
+---
+
+<Info>
+  Stale Feature Notifications are a Business feature. To learn more, read about our [pricing](https://devcycle.com/pricing). To upgrade your plan, please update your plan on your Billing Information page which can be found in your organization's Settings, or contact [Sales](/cdn-cgi/l/email-protection#9ae9fbf6ffe9dafeffecf9e3f9f6ffb4f9f5f7).
+</Info>
+
+Stale Features are identified based on specific conditions associated with their usage, modifications, and Feature type. DevCycle will alert you when a Feature has been qualified as potentially stale to help ensure that Features are surfaced for cleanup.
+
+If a Feature is marked as stale, DevCycle encourages users to take action by updating its status to Complete or Archived. This indicates that a Feature is ready to be cleaned up and removed from your codebase.
+
+## Stale Feature Reasons[​](#stale-feature-reasons "Direct link to Stale Feature Reasons")
+
+<Note>
+  Stale Feature detection relies on Variable evaluations triggered through the `.variable()` or `.variableValue()` SDK call. If your implementation uses `.allVariables()` or `.allFeatures()`, these calls do **not** generate evaluation data. As a result, Features may appear **Unused** and be marked stale even if they are actively used in your code. If you know the Feature is active and used via `.variable()` or `.variableValue()` you can choose to:
+
+  * **[Snooze or Disable](/platform/feature-flags/stale-feature-notifications#snoozing--disabling-stale-feature-notifications)** the staleness check for that Feature.
+  * **Uncheck "Unused"** as a staleness check type in your Project Settings to prevent similar cases. If you're unsure whether evaluations are occurring, contact Support with the Variable key name so we can investigate further.
+</Note>
+
+Features can belong to one of the following staleness reasons:
+
+### Unmodified[​](#unmodified "Direct link to Unmodified")
+
+#### Short-Lived[​](#short-lived "Direct link to Short-Lived")
+
+A Feature is classified as `Unmodified` if it has not been updated for more than 14 days.
+
+**Applicable to**: Release, Experiment Feature types.
+
+#### Long-Lived[​](#long-lived "Direct link to Long-Lived")
+
+A Feature is classified as `Unmodified` if it has not been updated for more than 30 days.
+
+**Applicable to**: Ops, Permissions Feature types.
+
+### Released[​](#released "Direct link to Released")
+
+A **Released** Feature is one that has been serving the same variation to all users in a production environment for 14 or more days. DevCycle confirms that distribution has reached 100% and all rollouts are complete.
+
+**Applicable to**: Release, Experiment Feature types.
+
+### Unused[​](#unused "Direct link to Unused")
+
+An **Unused** Feature is one where there are no evaluations or defaults for any Variables associated with the Feature for 2 weeks. Targeting status is irrelevant.
+
+**Applicable to**: All Feature types.
+
+<Info>
+  Staleness Feature checks are ONLY conducted on Features that have an `In Progress` status. Features marked as `Complete` are not checked for staleness, as they should already be considered ready for cleanup given their status.
+</Info>
+
+## Enabling Stale Feature Notifications for your Project[​](#enabling-stale-feature-notifications-for-your-project "Direct link to Enabling Stale Feature Notifications for your Project")
+
+To enable or disable Stale Feature Notifications, go to your **Project Settings** and locate the **Stale Feature Notifications** section.
+
+Only **Organization Owners** can enable or disable these notifications.
+
+Use the dropdown to select **Enabled**. From there, choose which types of staleness you want DevCycle to monitor.
+
+Use the dropdown and select **Enabled**. From there, you can specify which types of staleness you want DevCycle to check for.
+
+![image of settings page](/images/platform/feature-flags/assets/images/apr-2025-stale-flag-settings-email-fee896a7e75be99f085e14805d42ea29.png)
+
+## Stale Feature Notifications on the Dashboard[​](#stale-feature-notifications-on-the-dashboard "Direct link to Stale Feature Notifications on the Dashboard")
+
+You can find a list of stale Features on the main landing page of DevCycle.
+
+![image of home page](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-home-page-3821c14ba4da79fdecfca8fdb9fc3e1d.png)
+
+On the **Feature List** page, stale Features are marked with an exclamation point next to their status label. Hover over the status to see the specific staleness reason. diff
+
+![image of list page hover](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-list-page-hover-e15860a633fd136b481d939f5fd54d1f.png)
+
+You can also filter for all stale Features or specific staleness reasons on the Feature list page.
+
+![image of list page](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-list-page-c98bd7758d403383936b87ab31103d14.png)
+
+## Snoozing & Disabling Stale Feature Notifications[​](#snoozing--disabling-stale-feature-notifications "Direct link to Snoozing & Disabling Stale Feature Notifications")
+
+If a Feature is marked as stale, you will see a notification at the top of the Feature page.
+
+Click the **Details** button in the banner to go to the **Status** section, where you’ll see the exact reason for staleness.
+
+To **snooze** the notification, click the **Snooze** button and choose how long to pause staleness checks for that Feature. After the snooze period ends, DevCycle will resume checking.
+
+![image of snooze](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-snooze-68e3cbb061f3edb5cc8d582b21d74899.png)
+
+To **unsnooze** or change the snooze period, click the **Unsnooze** button.
+
+![image of unsnooze](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-unsnooze-fa6a671198bec8cb9b83cfe28d8508fa.png)
+
+To disable staleness checks for this Feature entirely, click the **Disable** button.
+
++To **re-enable** checks, go to the Feature’s **Settings** section and set the **Feature Staleness Check** dropdown to **Enabled**.
+
+![image of enable staleness checks](/images/platform/feature-flags/assets/images/nov-2024-stale-feat-disable-caf4e187cad90d108c0dd94fabfa36d7.png)
+
+## Stale Feature Report Email Notifications[​](#stale-feature-report-email-notifications "Direct link to Stale Feature Report Email Notifications")
+
+You can also set up **recurring email reports** with a summary of stale Features in your project.
+
+Each report includes:
+
+1. The total number of stale Features as of the email date.
+2. The change (delta) in stale Features since the last report.
+3. A breakdown of staleness types.
+   * Clicking on the staleness type takes you to a filtered list of those Features in the dashboard.
+
+![staleness email example](/images/platform/feature-flags/assets/images/apr-2025-stale-email-ex-e636d13fb3bdf503a3b91cdb3454cf99.png)
+
+Choose your preferred frequency—**Weekly, Bi-Weekly, or Monthly**—and specify who should receive the emails.
+
+![stale feature setttings section](/images/platform/feature-flags/assets/images/apr-2025-stale-flag-settings-email-fee896a7e75be99f085e14805d42ea29.png)
+
+If **Permissions are enabled** for your project:
+
+* Only users with *Publisher access or higher* can edit the email recipient list.
+
+If **Permissions are not enabled**:
+
+* *All users* can update the recipient list.
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/platform/feature-flags/stale-feature-notifications.md)
+
+Last updated on **Jul 9, 2025**

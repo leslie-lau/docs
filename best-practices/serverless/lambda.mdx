@@ -1,0 +1,94 @@
+---
+title: "AWS Lambda"
+---
+
+## AWS Lambda with DevCycle Feature Flags[​](#aws-lambda-with-devcycle-feature-flags "Direct link to AWS Lambda with DevCycle Feature Flags")
+
+DevCycle is purpose-built to work at edge, and just because you're building in serverless environments does not mean you need to stop using feature flags!
+
+If you're a team on AWS and utilizing AWS Lambda, this document will outline exactly how you can get started with Feature Flags without any difficulty.
+
+### Example Project for AWS Lambda & DevCycle[​](#example-project-for-aws-lambda--devcycle "Direct link to Example Project for AWS Lambda & DevCycle")
+
+To get you up and started, we've put together an example repository to be used to follow along with in this guide
+
+[https://github.com/DevCycleHQ/devcycle-lambda-example](https://github.com/DevCycleHQ/devcycle-lambda-example)
+
+### Setting Up Feature Flags for the Example[​](#setting-up-feature-flags-for-the-example "Direct link to Setting Up Feature Flags for the Example")
+
+1. Click “Create New Feature” from your “Feature" page or clicke the `+` button on the navigation bar
+
+   ![create-a-feature-cta.png](/images/best-practices/serverless/assets/images/create-feature-cta-c2ec259d85e9d83ea0e50852c50bb22a.png)
+
+2. Choose a Release type, and as per our example code we’ll name this feature `event-type`
+
+   ![Screen Shot 2022-09-13 at 4.30.46 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.30.46_PM-db9f8bdd3fb5bc825477c118054326b0.png)
+
+3. By default, features will all have a boolean flag. Remove the default boolean flag by clicking the edit button next to it and “Delete” in the popped up modal
+
+   ![Screen Shot 2022-09-13 at 4.33.22 PM.png](data:image/png;base64,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)
+
+   ![Screen Shot 2022-09-13 at 4.33.49 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.33.49_PM-79be5ba7884986a8a0873a148a3918dc.png)
+
+4. “Add Variable” with `String` type and put in the string as below
+
+   ![Screen Shot 2022-09-13 at 4.35.31 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.35.31_PM-5a73e645bc03a57b085ec9540c63273f.png)
+
+5. Scroll down to “Users & Targeting” for whichever environment's server key you selected
+
+6. Change the targeting definition to say: `User ID` `is` `test_1` and **click “Save”**
+
+   ![Screen Shot 2022-09-13 at 4.37.20 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.37.20_PM-6b60ae73928daa1e0e9dadd08f3c6ea9.png)
+
+   Now that the feature is set up, we’ll test it out in Lambda!
+
+### Setting Up AWS Lambda[​](#setting-up-aws-lambda "Direct link to Setting Up AWS Lambda")
+
+The [README in the example repo has more details regarding the Lambda Setup.](https://github.com/DevCycleHQ/devcycle-lambda-example#readme)
+
+1. Clone the [devcycle-lambda-example](https://github.com/DevCycleHQ/devcycle-lambda-example) repo
+2. In this example, we are using a ***server* key.** Copy your server key as the `<DEVCYCLE_SERVER_SDK_KEY>`  in the `initializeDevCycle` call. [(You can get your Server SDK key from the DevCycle dashboard)](/platform/account-management/keys)
+
+```
+const devcycleClient = await initializeDevCycle(  '<DEVCYCLE_SERVER_SDK_KEY>',).onClientInitialized()
+```
+
+3. Create a new bucket for deployment artifacts by executing `1-create-bucket.sh`
+
+```
+devcycle-lambda-example$ ./1-create-bucket.shmake_bucket: devcycle-lambda-example-940d87e83ef56f53
+```
+
+4. Build a Lambda layer that contains the function's runtime dependencies by executing `2-build-layer.sh`. (Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.)
+
+```
+devcycle-lambda-example$ ./2-build-layer.sh
+```
+
+5. Deploy this application by executing `3-deploy.sh`
+
+```
+devcycle-lambda-example$ ./3-deploy.shadded 16 packages from 18 contributors and audited 18 packages in 0.926sadded 17 packages from 19 contributors and audited 19 packages in 0.916sUploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)Successfully packaged artifacts and wrote output template to file out.yml.Waiting for changeset to be created..Waiting for stack create/update to completeSuccessfully created/updated stack - devcycle-lambda-example
+```
+
+6. To invoke the function, execute `4-invoke.sh`
+
+```
+devcycle-lambda-example$ ./4-invoke.sh{    "StatusCode": 200,    "ExecutedVersion": "$LATEST"}[{		"user_id":"test_1",		"clientDate":"2022-04-29T14:18:01Z",		"target":"my_target","featureVars":{},		"metaData":{"key":"value","example":123},		"type":"my-new-event","value":3},{		"user_id":"test_2",		"clientDate":"2022-04-29T14:18:01Z",		"target":"my_target",		"featureVars":{},		"metaData":{"key":"value","example":17},		"type":"my_event","value":60}]
+```
+
+7. The output should show two events:
+
+   The first event is for the user with `user_id: test_1`. This event should have its type changed to `my-new-event`, as the user\_id matches the targeting rule, resulting in the variation being ON.
+
+   Let the script invoke the function a few times and then press `CRTL+C`to exit.
+
+8. To delete the application, you can run `5-cleanup.sh`. The cleanup script deletes the application stack, which includes the function and execution role, and local build artifacts. You can choose to delete the bucket and function logs as well.
+
+```
+devcycle-lambda-example$ ./5-cleanup.shDeleted devcycle-lambda-example stack.Delete deployment artifacts and bucket (lambda-artifacts-4475xmpl08ba7f8d)?ydelete: s3://devcycle-lambda-example-940d87e83ef56f53/6f2edcce52085e31a4a5ba823dba2c9ddelete: s3://devcycle-lambda-example-940d87e83ef56f53/3d3aee62473d249d039d2d7a37512db3remove_bucket: devcycle-lambda-example-940d87e83ef56f53Delete function logs? (log group /aws/lambda/devcycle-lambda-example-function-1RQTXMPLR0YSO)y
+```
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/best-practices/serverless/lambda.md)
+
+Last updated on **Jul 9, 2025**

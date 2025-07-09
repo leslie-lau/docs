@@ -1,0 +1,183 @@
+---
+title: "Azure Functions"
+---
+
+## Azure Functions with DevCycle Feature Flags[​](#azure-functions-with-devcycle-feature-flags "Direct link to Azure Functions with DevCycle Feature Flags")
+
+DevCycle is purpose-built to work at the edge, and just because you're building in serverless environments does not mean you need to stop using feature flags!
+
+If you're a team on Azure and utilizing Azure Functions, this document will outline exactly how you can get started with Feature Flags without any difficulty.
+
+### Example Project for Azure Functions & DevCycle[​](#example-project-for-azure-functions--devcycle "Direct link to Example Project for Azure Functions & DevCycle")
+
+To get you up and started, we've put together an example repository to be used to follow along with in this guide
+
+[https://github.com/DevCycleHQ/azure-functions-example](https://github.com/DevCycleHQ/azure-functions-example)
+
+# Setting Up Feature Flags For the Example
+
+## Story[​](#story "Direct link to Story")
+
+Let's say you are a developer and working with the marketing team.
+
+They have some small campaigns to launch in future months and want you to build a webpage to promote the events. Instead of changing the event details **every** time before the next event is launched, you can utilize DevCycle Feature Flags to help you coordinate with the marketing team.
+
+The below example will demonstrate how you can use our feature flags with different types (`Boolean`, `String`, `JSON`) of variables.
+
+In the example code, `campaign-switch` (Boolean), is a switch to turn on/off the feature.
+
+Let’s say you have a campaign in October and December and don’t have one in November. You can just turn on your Feature Flag, `campaign-switch`, in Oct and Dec, and turn it off in Nov.
+
+No extra deployment is needed can always be owned by the marketing team. For `campaign-details` (JSON), you, as a developer, can set a data template of what you need in the website and let the marketing team change it whenever they want, like the number of guests, campaign id and name.
+
+For `dec-campaign-proposed-name` (String), it is convenient for the specific campaign team to add and choose the campaign name in the decision phrase. Sometimes we could have last-minute decisions, but with Feature Flags, the marketing team can change the campaign name easily by themselves (no coding needed!).
+
+Next section helps you understand how we set the 3 feature flags in DevCycle!
+
+### Setting up the feature on DevCycle Dashboard[​](#setting-up-the-feature-on-devcycle-dashboard "Direct link to Setting up the feature on DevCycle Dashboard")
+
+Before setting up your Azure function, we will set up three Features on the DevCycle dashboard of three different types: `campaign-switch` (Boolean), `campaign-details` (JSON), `dec-campaign-proposed-name` (String).
+
+To set the feature flags, make sure you have a DevCycle account [https://devcycle.com/](https://devcycle.com/).
+
+1. Click “Create New Feature” from your “Feature" page or clicke the `+` button on the navigation bar
+
+   ![create-a-feature-cta.png](/images/best-practices/serverless/assets/images/create-feature-cta-c2ec259d85e9d83ea0e50852c50bb22a.png)
+
+2. Click “Release” and type in the feature flag name in the popped up modal.
+
+   ![Screen Shot 2022-09-13 at 11.03.52 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.03.52_AM-6c34fe80a7afab4744e327890209b4a7.png)
+
+3. By default, you will see a Boolean feature flag
+
+   ![Screen Shot 2022-09-13 at 11.08.49 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.08.49_AM-c9a7ec5554e3ad6729f84221d13aaad4.png)
+
+4. Repeat step 1 - 2 for `campaign-details` and `dec-campaign-proposed-name`
+
+5. For `campaign-details` (JSON) and `dec-campaign-proposed-name`(string), you will need to remove the default boolean flag by clicking the edit button next to it and “Delete” in the popped up modal
+
+   ![Screen Shot 2022-09-13 at 11.15.01 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.15.01_AM-4df072a162130b310f3b6e1feb32bf19.png)
+
+   ![Screen Shot 2022-09-13 at 11.16.57 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.16.57_AM-c453ea0ae7aa6a36e5e15590afa12d59.png)
+
+6. For `campaign-details` (JSON), “Add Variable” with `JSON` type and put in the object as below
+
+   ![Screen Shot 2022-09-13 at 11.12.37 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.12.37_AM-321fdec0610cb7b5d4f3c5acc7102343.png)
+
+   ![Screen Shot 2022-09-13 at 11.22.27 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.22.27_AM-be3470a2cdad0eb3ae9d0a92501ee701.png)
+
+   ![Screen Shot 2022-09-13 at 11.23.35 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.23.35_AM-e12cf468ca4223a679a308eb671f0b6a.png)
+
+7. For `dec-campaign-proposed-name`(string), “Add Variable” with `String` type and put in the string as below
+
+   ![Screen Shot 2022-09-13 at 11.29.42 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.29.42_AM-2c758c8de066b8de9bcbc938932ea261.png)
+
+8. “Save” after editing the variable and variations
+
+   ![Screen Shot 2022-09-13 at 11.25.31 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.25.31_AM-9a43f50c8fc9bfde107e3e75aaa9f07d.png)
+
+### Setting Up Azure Function[​](#setting-up-azure-function "Direct link to Setting Up Azure Function")
+
+This section will be using [Visual Studio Code](https://code.visualstudio.com/) to integrate with Azure Functions, make sure you have the environment set up correctly: [https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-node#configure-your-environment](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-node#configure-your-environment)
+
+1. Go to your Azure portal and select one of your Function Apps with a Node.js runtime (using 16 LTS for this example) [https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp)
+
+   If you don’t have a function app you can create one and below is the example configuration:
+
+   ![Screen Shot 2022-09-13 at 3.14.11 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.14.11_PM-73984d12b5490b39035f9a17066346db.png)
+
+2. Clone the example code from above: [https://github.com/DevCycleHQ/azure-functions-example](https://github.com/DevCycleHQ/azure-functions-example)
+
+3. With the [Azure Tools extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack), you can click on the function cloned from the example code and deploy to the function app you have just created:
+
+   ![Screen Shot 2022-09-13 at 3.37.48 PM.png](data:image/png;base64,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)
+
+   ![Screen Shot 2022-09-13 at 3.31.51 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.31.51_PM-5c9bf78a3a95953b5e60fbfff7308626.png)
+
+4. If you see a `AzureWebJobsStorage` error, here are the steps to solve:
+
+   ![Screen Shot 2022-09-13 at 3.39.53 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.39.53_PM-320f3894ec11068594787b522c844b28.png)
+
+   1. checking your storage account > access keys
+
+   2. then copy the “Connection string”
+
+      ![Screen Shot 2022-09-13 at 3.43.09 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.43.09_PM-06dd603c5db525469d23794c40a0ba8c.png)
+
+   3. Go to your function app configuration, click “New application setting”, and paste the copied connection string to “Value”
+
+      ![Screen Shot 2022-09-13 at 3.49.15 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.49.15_PM-8398c089dee47a63fdc514aa18faecde.png)
+
+   4. Save the configuration and deploy again in VSCode
+
+5. Once deployed, you should see this message
+
+   ![Screen Shot 2022-09-13 at 3.52.40 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.52.40_PM-1663ce3fe91773ccfec95de296a4ca6e.png)
+
+6. Go back to your Azure Portal and set the environment variable `SERVER_KEY` in your function app configuration and save. [You can learn more about SDK keys and where to find them here.](/platform/account-management/keys)
+
+   ![Screen Shot 2022-09-13 at 3.55.40 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_3.55.40_PM-a6aa015c6ece5a1d9a269be0055f5c22.png)
+
+7. Go to your Function (i.e. HttpTrigger1), and “Test/Run” it
+
+   ![Screen Shot 2022-09-13 at 4.02.08 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.02.08_PM-2853468f4c202b9dc48374ce01b97c43.png)
+
+8. You should see the data you have set earlier in DevCycle dashboard!
+
+   ![Screen Shot 2022-09-13 at 4.07.43 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.07.43_PM-58d514939f554a808dfccdc30334ecfb.png)
+
+9. You can play around the feature flags we have set earlier and run the function again to see the result changed
+
+   1. For example, let’s “Serve” the “Variation Off” for `campaign-switch` and “Save”
+
+      ![Screen Shot 2022-09-13 at 12.06.57 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.06.57_PM-a87eb502711c3e18f1daaa83c5bbf0c3.png)
+
+   2. Run your function again
+
+   3. You should now see the following result
+
+      ![Screen Shot 2022-09-13 at 4.09.54 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_4.09.54_PM-e94ece75b108886f026c3b9b8c33235c.png)
+
+### Enable EdgeDB (NodeJS SDK Version)[​](#enable-edgedb-nodejs-sdk-version "Direct link to Enable EdgeDB (NodeJS SDK Version)")
+
+[First, you need to enable EdgeDB in the DevCycle Dashboard](/platform/feature-flags/targeting/edgedb)
+
+With the [DevCycle NodeJs SDK](/sdk/server-side-sdks/node) we use the `enableCloudBucketing` and `enableEdgeDB` options to enable EdgeDB usage. ([SDK initialization option details: ](/sdk/server-side-sdks/node/node-gettingstarted#initialization-options))
+
+```
+const devcycleClient = initializeDevCycle(serverKey, {  enableCloudBucketing: true,  enableEdgeDB: true,})
+```
+
+With EdgeDB enabled, you can save user data to our EdgeDB storage so that you don't have to pass in all the user data every time you identify a user.
+
+Like this part of code from our example code, we only need to pass in the whole set of user data for the first time. After that, we only need `user_id` to get the rest of the data we have set in EdgeDB
+
+```
+const userWithAllData = {	  user_id: "testuser_1234333",	  email: "[email protected]"};const { value: hasCampaign } = await devcycleClient.variable(userWithAllData, "campaign-switch", false);const { value: campaignData } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "campaign-details", {});const { value: proposedCampaignTitle } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "dec-campaign-proposed-name", "");
+```
+
+With the `VIP` variation set in `dec-campaign-proposed-name`, we can head to the `dec-campaign-proposed-name` Feature in the dashboard and test EdgeDB:
+
+1. Add a targeting rule with name “VIP” and move it above “All User” rule.
+
+2. In the Definition, select “User Email” and type in the email we have set in EdgeDB (i.e. `[email protected]`)
+
+3. From the “Serve” dropdown, select “VIP”
+
+4. Click “Save”
+
+   ![Screen Shot 2022-09-13 at 12.39.19 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.39.19_PM-1ff2ee9c0de582e96a1a3ce66a081fec.png)
+
+5. Go back to the Azure Function and run it again, you should see the “title” change to “VIP” which means we don’t need to pass in email in the below variable request and get the data `email` from EdgeDB!
+
+```
+const { value: proposedCampaignTitle } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "dec-campaign-proposed-name", "");
+```
+
+And the result!
+
+![Screen Shot 2022-09-13 at 12.48.01 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.48.01_PM-dda84ab198eb6159033797f7bf7dbfbd.png)
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/best-practices/serverless/azure.md)
+
+Last updated on **Jul 9, 2025**

@@ -1,0 +1,147 @@
+---
+title: "Google Cloud Functions"
+---
+
+## Google Cloud Functions with DevCycle Feature Flags[​](#google-cloud-functions-with-devcycle-feature-flags "Direct link to Google Cloud Functions with DevCycle Feature Flags")
+
+DevCycle is purpose-built to work at edge, and just because you're building in serverless environments does not mean you need to stop using feature flags!
+
+If you're a team on GCP and utilizing Google's Cloud Functions, this document will outline exactly how you can get started with Feature Flags without any difficulty.
+
+### Example Project for Google Cloud Functions & DevCycle[​](#example-project-for-google-cloud-functions--devcycle "Direct link to Example Project for Google Cloud Functions & DevCycle")
+
+To get you up and started, we've put together an example repository to be used to follow along with in this guide
+
+[https://github.com/DevCycleHQ/google-cloud-functions-example](https://github.com/DevCycleHQ/google-cloud-functions-example)
+
+### Setting up your Features[​](#setting-up-your-features "Direct link to Setting up your Features")
+
+Before setting up your Google Cloud function, we will set up three Features on the DevCycle dashboard of three different types: `campaign-switch` (Boolean), `campaign-details` (JSON), `dec-campaign-proposed-name`(String).
+
+To set the feature flags, make sure you have a [DevCycle](https://app.devcycle.com/) account.
+
+1. Click “Create New Feature” from your “Feature" page or clicke the `+` button on the navigation bar
+
+   ![create-a-feature-cta.png](/images/best-practices/serverless/assets/images/create-feature-cta-c2ec259d85e9d83ea0e50852c50bb22a.png)
+
+2. Click “Release” and type in the feature flag name in the popped up modal.
+
+   ![feature-create-modal.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.03.52_AM-6c34fe80a7afab4744e327890209b4a7.png)
+
+3. By default, you will see a Boolean feature flag
+
+   ![Screen Shot 2022-09-13 at 11.08.49 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.08.49_AM-c9a7ec5554e3ad6729f84221d13aaad4.png)
+
+4. Repeat step 1 - 2 for `campaign-details` and `dec-campaign-proposed-name`
+
+5. For `campaign-details` (JSON) and `dec-campaign-proposed-name`(string), you will need to remove the default boolean flag by clicking the edit button next to it and “Delete” in the popped up modal
+
+   ![Screen Shot 2022-09-13 at 11.15.01 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.15.01_AM-4df072a162130b310f3b6e1feb32bf19.png)
+
+   ![Screen Shot 2022-09-13 at 11.16.57 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.16.57_AM-c453ea0ae7aa6a36e5e15590afa12d59.png)
+
+6. For `campaign-details` (JSON), “Add Variable” with `JSON` type and put in the object as below
+
+   ![Screen Shot 2022-09-13 at 11.12.37 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.12.37_AM-321fdec0610cb7b5d4f3c5acc7102343.png)
+
+   ![Screen Shot 2022-09-13 at 11.22.27 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.22.27_AM-be3470a2cdad0eb3ae9d0a92501ee701.png)
+
+   ![Screen Shot 2022-09-13 at 11.23.35 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.23.35_AM-e12cf468ca4223a679a308eb671f0b6a.png)
+
+7. For `dec-campaign-proposed-name`(string), “Add Variable” with `String` type and put in the string as below
+
+   ![Screen Shot 2022-09-13 at 11.29.42 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.29.42_AM-2c758c8de066b8de9bcbc938932ea261.png)
+
+8. “Save” after editing the variable and variations
+
+   ![Screen Shot 2022-09-13 at 11.25.31 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.25.31_AM-9a43f50c8fc9bfde107e3e75aaa9f07d.png)
+
+### Setting Up a Google Cloud Function[​](#setting-up-a-google-cloud-function "Direct link to Setting Up a Google Cloud Function")
+
+1. Go to your Google Cloud Functions console([https://console.cloud.google.com/functions](https://console.cloud.google.com/functions)) to create a function. ([For more info from Google](https://cloud.google.com/functions/docs/console-quickstart))
+
+2. Follow below configurations
+
+   ![Screen Shot 2022-09-13 at 11.42.38 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.42.38_AM-e0e988cd5e05da7c6ea122b797210ec3.png)
+
+3. Add the environment variable `SERVER_KEY` under “Runtime environment variables” ([Related Google Doc](https://cloud.google.com/functions/docs/configuring/env-var) For getting the server-side SDK key from DevCycle, you can read this section ([https://docs.devcycle.com/platform/account-management/keys](/platform/account-management/keys)) ![Screen Shot 2022-09-13 at 11.51.57 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.51.57_AM-ec9397efd46758d9bf7ae65dd73bcc0d.png)
+
+4. Click “Next” and enter the ([contents of the `index.js` from the example repo](https://github.com/DevCycleHQ/google-cloud-functions-example/blob/main/index.js)) into the Console ![Screen Shot 2022-09-13 at 11.47.59 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.47.59_AM-827106f4cb0a00fc8e9d993a5ef41828.png)
+
+5. Add the DevCycle SDK to `package.json`
+
+   ![Screen Shot 2022-09-13 at 11.48.06 AM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_11.48.06_AM-0a625643a34be8a0e47982e7189e8827.png)
+
+6. Click “Deploy”, once finished, you'll be given a URL
+
+   ![Screen Shot 2022-09-13 at 12.01.52 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.01.52_PM-860cd88decafb451ddc5da2ac4441afc.png)
+
+7. Go to that URL and you should see the Feature info we set up!
+
+   ![Screen Shot 2022-09-13 at 12.04.41 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.04.41_PM-76bae0bef3d3c20203843a89abe89f26.png)
+
+8. You can play around with the feature flags we have created earlier to see the result changed in the page.
+
+9. For example, let’s “Serve” the “Variation Off” for `campaign-switch` and “Save”
+
+   ![Screen Shot 2022-09-13 at 12.06.57 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.06.57_PM-a87eb502711c3e18f1daaa83c5bbf0c3.png)
+
+10. Refresh your function's page
+
+11. You should now see the following result in the page:
+
+![Screen Shot 2022-09-13 at 12.08.55 PM.png](data:image/png;base64,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)
+
+## Serverless with EdgeDB[​](#serverless-with-edgedb "Direct link to Serverless with EdgeDB")
+
+EdgeDB is purpose built to work at edge, and when used in conjunction with a serverless system like Cloud Functions, it actually makes the entire system even faster!
+
+Here is some more reading:
+
+[What is EdgeDB?](/platform/feature-flags/targeting/edgedb)
+
+[Use Cases of EdgeDB](/platform/feature-flags/targeting/edgedb#use-cases)
+
+### Enable EdgeDB (NodeJS SDK Version)[​](#enable-edgedb-nodejs-sdk-version "Direct link to Enable EdgeDB (NodeJS SDK Version)")
+
+First, you need to [enable EdgeDB](/platform/feature-flags/targeting/edgedb#setup) in the DevCycle Dashboard
+
+With the [DevCycle NodeJs SDK ](/sdk/server-side-sdks/node)we use the `enableCloudBucketing` and `enableEdgeDB` options to enable EdgeDB usage. ([SDK initialization option details: ](/sdk/server-side-sdks/node/node-gettingstarted#initialization-options))
+
+```
+const devcycleClient = initializeDevCycle(serverKey, {      enableCloudBucketing: true,      enableEdgeDB: true,})
+```
+
+With EdgeDB enabled, you can save user data to our EdgeDB storage so that you don't have to pass in all the user data every time you identify a user.
+
+Like this part of code from our example code, we only need to pass in the whole set of user data for the first time. After that, we only need `user_id` to get the rest of the data we have set in EdgeDB
+
+```
+const userWithAllData = {	  user_id: "testuser_1234333",	  email: "[email protected]"};const { value: hasCampaign } = await devcycleClient.variable(userWithAllData, "campaign-switch", false);const { value: campaignData } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "campaign-details", {});const { value: proposedCampaignTitle } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "dec-campaign-proposed-name", "");
+```
+
+With the `VIP` variation set in `dec-campaign-proposed-name`, we can head to the `dec-campaign-proposed-name` Feature in the dashboard and test EdgeDB:
+
+1. Add a targeting rule with name “VIP” and move it above “All User” rule.
+
+2. In the Definition, select “User Email” and type in the email we have set in EdgeDB (i.e. `[email protected]`)
+
+3. From the “Serve” dropdown, select “VIP”
+
+4. Click “Save”
+
+   ![Screen Shot 2022-09-13 at 12.39.19 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.39.19_PM-1ff2ee9c0de582e96a1a3ce66a081fec.png)
+
+5. Go back to the google cloud function URL and refresh, you should see the “title” change to “VIP” which means we don’t need to pass in email in the below variable request and get the data `email` from EdgeDB!
+
+```
+const { value: proposedCampaignTitle } = await devcycleClient.variable({ user_id: "testuser_1234333" }, "dec-campaign-proposed-name", "");
+```
+
+And the result!
+
+![Screen Shot 2022-09-13 at 12.48.01 PM.png](/images/best-practices/serverless/assets/images/Screen_Shot_2022-09-13_at_12.48.01_PM-dda84ab198eb6159033797f7bf7dbfbd.png)
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/best-practices/serverless/serverless-cloud-functions.md)
+
+Last updated on **Jul 9, 2025**

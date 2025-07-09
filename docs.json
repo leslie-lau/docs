@@ -1,102 +1,299 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "DevCycle Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0D9373",
+    "light": "#55D799",
+    "dark": "#0D9373"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Home",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Home",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "home"
+            ]
+          },
+          {
+            "group": "Quickstart",
+            "pages": [
+              "quickstart"
             ]
           },
           {
             "group": "Essentials",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "essentials/overview",
+              "essentials/key-features",
+              "essentials/architecture",
+              "essentials/feature-hierarchy",
+              "essentials/feature-types"
+            ]
+          },
+          {
+            "group": "Platform",
+            "pages": [
+              {
+                "group": "Feature Flags",
+                "pages": [
+                  "platform/feature-flags/features",
+                  "platform/feature-flags/status-and-lifecycle",
+                  "platform/feature-flags/stale-feature-notifications"
+                ]
+              },
+              {
+                "group": "Experimentation",
+                "pages": [
+                  "platform/experimentation/feature-experimentation",
+                  "platform/experimentation/creating-and-managing-metrics",
+                  "platform/experimentation/how-metrics-are-calculated",
+                  "platform/experimentation/tutorial-experiment-setup"
+                ]
+              },
+              {
+                "group": "Account Management",
+                "pages": [
+                  "platform/account-management/organizations",
+                  "platform/account-management/projects",
+                  "platform/account-management/environments",
+                  "platform/account-management/keys"
+                ]
+              },
+              {
+                "group": "Security and Guardrails",
+                "pages": [
+                  "platform/security-and-guardrails/approval-workflows",
+                  "platform/security-and-guardrails/audit-log",
+                  "platform/security-and-guardrails/custom-property-schemas",
+                  "platform/security-and-guardrails/feature-obfuscation",
+                  "platform/security-and-guardrails/permissions",
+                  "platform/security-and-guardrails/sdk-visibility",
+                  "platform/security-and-guardrails/variable-schemas"
+                ]
+              },
+              {
+                "group": "Testing and QA",
+                "pages": [
+                  "platform/testing-and-qa/self-targeting",
+                  "platform/testing-and-qa/web-debugger"
+                ]
+              },
+              {
+                "group": "Extras",
+                "pages": [
+                  "platform/extras/custom-domains",
+                  "platform/extras/feature-opt-in",
+                  "platform/extras/self-hosting",
+                  "platform/extras/webhooks"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Examples",
+            "pages": [
+              "examples"
+            ]
+          },
+          {
+            "group": "Product Roadmap",
+            "pages": [
+              "product-roadmap"
+            ]
+          },
+          {
+            "group": "Home",
+            "pages": [
+              "home"
+            ]
+          },
+          {
+            "group": "Quickstart",
+            "pages": [
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Essentials",
+            "pages": [
+              "essentials/overview",
+              "essentials/key-features",
+              "essentials/architecture",
+              "essentials/feature-hierarchy",
+              "essentials/feature-types"
+            ]
+          },
+          {
+            "group": "Platform",
+            "pages": [
+              {
+                "group": "Feature Flags",
+                "pages": [
+                  "platform/feature-flags/features",
+                  "platform/feature-flags/status-and-lifecycle",
+                  "platform/feature-flags/stale-feature-notifications"
+                ]
+              },
+              {
+                "group": "Experimentation",
+                "pages": [
+                  "platform/experimentation/feature-experimentation",
+                  "platform/experimentation/creating-and-managing-metrics",
+                  "platform/experimentation/how-metrics-are-calculated",
+                  "platform/experimentation/tutorial-experiment-setup"
+                ]
+              },
+              {
+                "group": "Account Management",
+                "pages": [
+                  "platform/account-management/organizations",
+                  "platform/account-management/projects",
+                  "platform/account-management/environments",
+                  "platform/account-management/keys"
+                ]
+              },
+              {
+                "group": "Security and Guardrails",
+                "pages": [
+                  "platform/security-and-guardrails/approval-workflows",
+                  "platform/security-and-guardrails/audit-log",
+                  "platform/security-and-guardrails/custom-property-schemas",
+                  "platform/security-and-guardrails/feature-obfuscation",
+                  "platform/security-and-guardrails/permissions",
+                  "platform/security-and-guardrails/sdk-visibility",
+                  "platform/security-and-guardrails/variable-schemas"
+                ]
+              },
+              {
+                "group": "Testing and QA",
+                "pages": [
+                  "platform/testing-and-qa/self-targeting",
+                  "platform/testing-and-qa/web-debugger"
+                ]
+              },
+              {
+                "group": "Extras",
+                "pages": [
+                  "platform/extras/custom-domains",
+                  "platform/extras/feature-opt-in",
+                  "platform/extras/self-hosting",
+                  "platform/extras/webhooks"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Examples",
+            "pages": [
+              "examples"
+            ]
+          },
+          {
+            "group": "Product Roadmap",
+            "pages": [
+              "product-roadmap"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "SDKs",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Sdk/",
             "pages": [
-              "api-reference/introduction"
+              "sdk/"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Features",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "sdk/features"
+            ]
+          },
+          {
+            "group": "Client-side SDKS",
+            "pages": [
+              "sdk/client-side-sdks/javascript/",
+              "sdk/client-side-sdks/react/",
+              "sdk/client-side-sdks/nextjs/",
+              "sdk/client-side-sdks/angular/",
+              "sdk/client-side-sdks/ios/",
+              "sdk/client-side-sdks/android/",
+              "sdk/client-side-sdks/react-native/",
+              "sdk/client-side-sdks/flutter/",
+              "sdk/client-side-sdks/roku/"
+            ]
+          },
+          {
+            "group": "Server-side SDKS",
+            "pages": [
+              "sdk/server-side-sdks/node/",
+              "sdk/server-side-sdks/nestjs/",
+              "sdk/server-side-sdks/php/",
+              "sdk/server-side-sdks/go/",
+              "sdk/server-side-sdks/ruby/",
+              "sdk/server-side-sdks/python/",
+              "sdk/server-side-sdks/java/",
+              "sdk/server-side-sdks/dotnet/"
+            ]
+          },
+          {
+            "group": "SDK Proxy",
+            "pages": [
+              "sdk/sdk-proxy/",
+              "sdk/sdk-proxy/installation",
+              "sdk/sdk-proxy/usage"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Best Practices",
+        "groups": [
+          {
+            "group": "Best Practices",
+            "pages": [
+              {
+                "group": "Serverless Flagging",
+                "pages": [
+                  "best-practices/serverless/serverless-cloud-functions",
+                  "best-practices/serverless/lambda",
+                  "best-practices/serverless/azure"
+                ]
+              },
+              {
+                "group": "Security",
+                "pages": [
+                  "best-practices/security/api-keys-secret-scanning",
+                  "best-practices/security/compromised-keys"
+                ]
+              },
+              {
+                "group": "Edge Flags",
+                "pages": [
+                  "best-practices/edgedb-and-edge-flags/edge-db-via-api-simple",
+                  "best-practices/edgedb-and-edge-flags/import-from-anywhere"
+                ]
+              },
+              "best-practices/feature-grouping",
+              "best-practices/effectively-organizing-feature-flags",
+              "best-practices/migration",
+              "best-practices/tech-debt",
+              "best-practices/continuous-deployment",
+              "best-practices/engineering-led-experiments",
+              "best-practices/product-led-experimentation",
+              "best-practices/datadog-rum",
+              "best-practices"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ]
   }
 }
