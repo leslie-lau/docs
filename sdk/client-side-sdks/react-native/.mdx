@@ -1,0 +1,62 @@
+---
+title: "DevCycle React Native"
+description: "The DevCycle React Native SDK lets you easily integrate your React Native web applications with DevCycle."
+---
+
+<Info>
+  DevCycle supports React Native Expo. See the [React Native Expo SDK](/sdk/client-side-sdks/react-native/react-native-expo-install) installation for more information.
+</Info>
+
+<Warning>
+  Extra steps are required to get DevCycle working with React Native Web. See the [React Native Web](#react-native-web) section below for more information.
+</Warning>
+
+<CardGroup>
+  <Card title="InstallationInstalling the SDK" href="/sdk/client-side-sdks/react-native/react-native-install">
+    ##
+  </Card>
+</CardGroup>
+
+<CardGroup>
+  <Card title="Expo InstallationInstalling the Expo SDK" href="/sdk/client-side-sdks/react-native/react-native-expo-install">
+    ##
+  </Card>
+</CardGroup>
+
+<CardGroup>
+  <Card title="Getting StartedInitializing the SDK" href="/sdk/client-side-sdks/react-native/react-native-gettingstarted">
+    ##
+  </Card>
+</CardGroup>
+
+<CardGroup>
+  <Card title="UsageUsing the SDK" href="/sdk/client-side-sdks/react-native/react-native-usage">
+    ##
+  </Card>
+</CardGroup>
+
+The React Native SDK is available as a package on npm. A separate React Native Expo SDK is available as a package on npm. Both SDKs are also open source and can be viewed on Github.
+
+[![React-Native package version](/images/sdk/client-side-sdks/react-native/npm/v/-devcycle/react-native-client-sdk)](https://www.npmjs.com/package/@devcycle/react-native-client-sdk) [![Expo package version](/images/sdk/client-side-sdks/react-native/npm/v/-devcycle/react-native-expo-client-sdk)](https://www.npmjs.com/package/@devcycle/react-native-expo-client-sdk) [![GitHub](/images/sdk/client-side-sdks/react-native/github/stars/devcyclehq/js-sdks.svg)](https://github.com/devcyclehq/js-sdks)
+
+## Requirements[​](#requirements "Direct link to Requirements")
+
+This SDK is compatible with *React Native* version 0.64.0 and above.
+
+<Warning>
+  If you are using [Flipper](https://fbflipper.com/) with React Native versions below `0.75.0`, SSE connections (which power real-time updates) will not work on Android unless Flipper is disabled. See [this issue](https://github.com/binaryminds/react-native-sse/issues/61) for more information.
+</Warning>
+
+## React Native Web[​](#react-native-web "Direct link to React Native Web")
+
+To get your React Native Web working with DevCycle, you will need to change one of the rules in the webpack config to include `.cjs` files as one of the file types to be transpiled, e.g.:
+
+```
+const createExpoWebpackConfigAsync = require('@expo/webpack-config')module.exports = async function (env, argv) {  const config = await createExpoWebpackConfigAsync(env, argv)  config.module.rules = config.module.rules.map((rule) => {    if (rule.oneOf instanceof Array) {      // add "cjs" as an exclusion to this rule to prevent it from being regarded as an asset      rule.oneOf[rule.oneOf.length - 1].exclude = [        /\.(js|mjs|jsx|cjs|ts|tsx)$/,        /\.html$/,        /\.json$/,      ]    }    return rule  })  return config}
+```
+
+For more information, see [this](https://github.com/facebook/create-react-app/pull/12021#issuecomment-1108426483) Github issue.
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/sdk/client-side-sdks/react-native/react-native.md)
+
+Last updated on **Jul 9, 2025**

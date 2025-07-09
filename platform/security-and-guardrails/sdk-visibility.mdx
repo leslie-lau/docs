@@ -1,0 +1,20 @@
+---
+title: "SDK Visibility"
+description: "Typically, DevCycle Variables are served to any SDK where the identified user matches the configured set of targeting rules. This behaviour is suitable for most applications. However, there are cases where a project may contain server-side Features that should never have their Variables served to client and/or mobile SDKs. It can become cumbersome and risky to ensure Targeting Rules exclude those SDKs in every server-only Feature."
+---
+
+For this purpose, DevCycle supports an "SDK Visiblity" setting. Setting this allows for control over which SDK types can receive a Feature. Only SDKs corresponding to the checked types will receive the Feature in the configuration, and Targeting Rules will not be evaluated for unselected platforms. Evaluating a Variable on unselected SDK platforms will result in the default value being served. The setting defaults to "Server" SDKs only on every new Feature, ensuring a safe default that must be explicitly changed to expose a Feature to clients.
+
+### How to enable[​](#how-to-enable "Direct link to How to enable")
+
+To use SDK visibility settings, the feature must first be enabled from the Edit Project page.
+
+![Organization SDK Visibility Setting](/images/platform/security-and-guardrails/assets/images/sdk-visibility-setting-7c79a4a52e6f12474a9728932c130fa3.png)
+
+Once enabled, the setting will appear on the Feature page, and you can control which SDK types can use the Feature.
+
+![Feature SDK Visibility Setting](/images/platform/security-and-guardrails/assets/images/sdk-settings-02c2a5db115fc1dca4a9da9a19aef321.png)
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/platform/security-and-guardrails/sdk-visibility.md)
+
+Last updated on **Jul 9, 2025**

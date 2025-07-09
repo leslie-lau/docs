@@ -1,0 +1,60 @@
+---
+title: "Variable Schemas"
+description: "Variable Schemas is a new DevCycle feature that lets you define allowable values for your variables when creating feature variations. Variable Schemas help developers ensure that team members can easily select allowable inputs for variable values without being nervous that a certain value might cause an application crash or negatively impact end user experience."
+---
+
+## Defining a Variable Schema[​](#defining-a-variable-schema "Direct link to Defining a Variable Schema")
+
+To define a Variable Schema for a variable, navigate to the Schema section of the Variable Details page to select and define a schema for that particular variable. Variable Schemas can be added to both associated or unassociated variables.
+
+There are three different types of schemas that you can define for your variable:
+
+* Enum (*String or Number Variable*)
+* Regex (*String Variable*)
+* JSON (*JSON Variable*)
+
+Each schema type requires a **Brief Description**. For example, when defining an Enum schema for a String variable that's meant for a greeting message on a sign up page, a sample description could be “Greeting options for sign-up page.”
+
+You also must set an **Example Value**. The example value will be used as the initial value for each variation when adding this variable to a feature.
+
+<Warning>
+  You will be unable to define or edit a Schema that makes the associated Feature’s values invalid.
+</Warning>
+
+An **Enum** schema will allow you to input allowable values for a string or number variable.
+
+If “Enum” type is selected, users must define the allowable values in the **Enum Values** input field.
+
+*Enum Example:* ![Enum Schema Example](/images/platform/security-and-guardrails/assets/images/june-2023-enum-schema-example-846e042d0b95e2e98db1ae88f32c7b84.png)
+
+A **Regex** schema allows you to define a regex pattern. Variation values for a variable with a Regex schema type must match the pattern defined in the schema.
+
+*Regex Example:* ![Regex Schema Example](/images/platform/security-and-guardrails/assets/images/june-2023-regex-schema-example-0d42b6aa009433132020245c70d0d1ed.png)
+
+A **JSON** schema will allow DVC users to define a JSON schema that variation values must follow. If “JSON schema” type is selected, users can define the schema below in a JSON editor. Example JSON Schemas and more information about them can be found [here](https://json-schema.org/learn/miscellaneous-examples.html#basic).
+
+*JSON Example:* ![JSON Schema Example](/images/platform/security-and-guardrails/assets/images/june-2023-json-schema-example-98622d30acc9b15a14ef99e5237b7525.png)
+
+Once a variable is created and schema has been defined, click save and then you can add this variable to a feature.
+
+## Adding a Variable with a Defined Schema[​](#adding-a-variable-with-a-defined-schema "Direct link to Adding a Variable with a Defined Schema")
+
+Once the variable is created and a schema has been defined, you can add it to a feature like any other unassociated variable and select it from the dropdown in the Add New Variable modal within a feature.
+
+![Add Variable Modal with Schema Example](/images/platform/security-and-guardrails/assets/images/june-2023-adding-variable-with-schema-modal-d0c80cff372ee77f616f4ae84607f37a.png)
+
+If a variable that has a schema is selected, an info box will appear that outlines the schema type and has the Brief Description of the schema defined on the Variable details page.
+
+You can also click on the word *"here”* to open a side panel which displays the schema definition along with other details about the variable.
+
+![Add New Variable JSON Schema Selected](/images/platform/security-and-guardrails/assets/images/june-2023-add-new-variable-json-schema-selected-61a3bfe26962dd60901c9302e48483f8.png)
+
+## Adding a New Variation for Variables with a Defined Schema[​](#adding-a-new-variation-for-variables-with-a-defined-schema "Direct link to Adding a New Variation for Variables with a Defined Schema")
+
+When adding a new variation for a variable with a schema, you can click on the variable name (e.g. *inline-search* in this example) to open a side panel which displays the schema definition along with other details about the variable.
+
+![Add New Variable JSON Schema Selected](/images/platform/security-and-guardrails/assets/images/june-2023-add-new-variation-with-schema-e6fbcde827750e31125174c77ec4d43c.png)
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/platform/security-and-guardrails/variable-schemas.md)
+
+Last updated on **Jul 9, 2025**

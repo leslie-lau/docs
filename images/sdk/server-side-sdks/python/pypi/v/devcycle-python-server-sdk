@@ -1,0 +1,20 @@
+<svg width="85.8" height="20" viewBox="0 0 858 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pypi: v3.11.3">
+  <title>pypi: v3.11.3</title>
+  <linearGradient id="rQlQe" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="WMIZO"><rect width="858" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#WMIZO)">
+    <rect width="333" height="200" fill="#555"/>
+    <rect width="525" height="200" fill="#08C" x="333"/>
+    <rect width="858" height="200" fill="url(#rQlQe)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="60" y="148" textLength="233" fill="#000" opacity="0.25">pypi</text>
+    <text x="50" y="138" textLength="233">pypi</text>
+    <text x="388" y="148" textLength="425" fill="#000" opacity="0.25">v3.11.3</text>
+    <text x="378" y="138" textLength="425">v3.11.3</text>
+  </g>
+  
+</svg>

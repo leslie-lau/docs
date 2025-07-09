@@ -1,0 +1,64 @@
+---
+title: "Custom Domains"
+description: "When using client-side SDKs, particularly web client SDKs, there is the potential for ad blockers and browser privacy features to block requests and third-party cookies. Custom Domains with DevCycle ensures all cookies and requests used are first-party and will not be blocked by ensuring requests are sent through your recognized domain. A DNS CNAME needs to be created to leverage this feature."
+---
+
+<Info>
+  **Setting Up Custom Domains:**
+
+  Custom Domains is a business and enterprise feature and requires manual setup on both your end as well as DevCycle's.
+
+  These docs cannot be taken as a step-by-step guide to set up custom domains and are more intended as an outline of the process as it requires setup from DevCycle's end as well prior to starting.
+
+  Please reach out to your account representative or reach out to [\[email protected\]](/cdn-cgi/l/email-protection#8dfef8fdfde2fff9cde9e8fbeef4eee1e8a3eee2e0) to get started with this process with the following information:
+
+  * Desired CNAME domain (e.g. api-alias.your-domain.com)
+  * Your desired SSL certificate provider (SSL.com, Google Trust Services, Let's Encrypt.)
+  * Which Services to use the CNAME (e.g. Client SDKs, Server SDKs, Mobile SDKs)
+</Info>
+
+#### Setup Steps[​](#setup-steps "Direct link to Setup Steps")
+
+1. **Identifying a Hostname**
+
+* The first step involves **identifying** a hostname to use as the CNAME for DevCycle's endpoint. Provide this to DevCycle upon requesting to enable this feature. The hostname should look something like this `https://api-alias.your-domain.com`.
+  * If there is more than one service in use, each one will need a unique CNAME. This is also true for using DevCycle on multiple domains. Each domain needs its own CNAME.
+
+2. **DNS Validation** Once the setup is complete, two DNS records will be provided by DevCycle and you will need to add those records to your DNS provider (TXT validation records).
+
+* The first DNS record will be a TXT verification record to ensure that you own the domain that you are asking DevCycle to use as a custom hostname.
+* The second DNS record will be a TXT verification record to ensure that you have permission to create an SSL certificate for said domain. This record will conflict with any existing A/AAAA or CNAME records on the hostname and require them to be removed before adding the verification record.
+
+Once these records have been added, please let DevCycle know.
+
+3. **Additional Setup Step** Once validation is complete and DevCycle has confirmed the records are set properly, there may be an extra step involved here with DevCycle depending on your SDK configuration. DevCycle will let you know if this is needed.
+
+4. **Creating a CNAME** Once all steps are complete, DevCycle will send the details for the DNS CNAME. Once added, the service will be immediately available at the given hostname.
+
+#### SDK Implementation[​](#sdk-implementation "Direct link to SDK Implementation")
+
+Once you have completed the above setup to create a CNAME, proceed in modifying your existing SDK initialization to include the `apiProxyURL` initialization option.
+
+**JS SDK Initialization Update**
+
+Add the `apiProxyURL` option and your CNAME domains as per the [JS SDK Initialization Options](https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-gettingstarted#initialization-options).
+
+```
+const devcycleClient = initializeDevCycle('<DEVCYCLE_CLIENT_SDK_KEY>', user, {  apiProxyURL: 'https://api-alias.your-domain.com',})
+```
+
+**iOS SDK Initialization Update**
+
+Add the `apiProxyURL` option and your CNAME domains as per the [iOS SDK DevCycle Options Builder](https://docs.devcycle.com/sdk/client-side-sdks/ios/ios-gettingstarted#devcycleoptions-builder).
+
+```
+let options = DevCycleOptions.builder().apiProxyURL("https://api-alias.your-domain.com").build()let client =  try? DevCycleClient.builder()            .sdkKey("<DEVCYCLE_SDK_KEY>")            .user(user!)            .options(options)            .build(onInitialized: nil)
+```
+
+After completing the steps above, users should be able to freely maneuver around AdBlockers and prevent them from blocking requests to our API servers and our SDK.
+
+If you have any questions regarding this process, please reach out to our [support](/cdn-cgi/l/email-protection#275452575748555367434251445e444b420944484a) team.
+
+[Edit this page](https://github.com/devcyclehq/devcycle-docs/edit/main/docs/platform/extras/custom-domains.md)
+
+Last updated on **Jul 9, 2025**
