@@ -42,6 +42,27 @@
                 "group": "Feature Flags",
                 "pages": [
                   "platform/feature-flags/features",
+                                     {
+                     "group": "Variables and Variations",
+                     "pages": [
+                       "platform/feature-flags/variables-and-variations/variables",
+                       "platform/feature-flags/variables-and-variations/variations",
+                       "platform/feature-flags/variables-and-variations/variable-defaults",
+                       "platform/feature-flags/variables-and-variations/feature-flag-reach"
+                     ]
+                   },
+                   {
+                     "group": "Targeting",
+                     "pages": [
+                       "platform/feature-flags/targeting/targeting-overview",
+                       "platform/feature-flags/targeting/audiences",
+                       "platform/feature-flags/targeting/custom-properties",
+                       "platform/feature-flags/targeting/random-variations",
+                       "platform/feature-flags/targeting/rollouts",
+                       "platform/feature-flags/targeting/randomize-using-custom-property",
+                       "platform/feature-flags/targeting/edgedb"
+                     ]
+                   },
                   "platform/feature-flags/status-and-lifecycle",
                   "platform/feature-flags/stale-feature-notifications"
                 ]
@@ -112,9 +133,9 @@
         "tab": "SDKs",
         "groups": [
           {
-            "group": "Sdk/",
+            "group": "Overview",
             "pages": [
-              "sdk/"
+              "sdk/sdk-overview"
             ]
           },
           {
@@ -126,15 +147,114 @@
           {
             "group": "Client-side SDKS",
             "pages": [
-              "sdk/client-side-sdks/javascript/",
-              "sdk/client-side-sdks/react/",
-              "sdk/client-side-sdks/nextjs/",
-              "sdk/client-side-sdks/angular/",
-              "sdk/client-side-sdks/ios/",
-              "sdk/client-side-sdks/android/",
-              "sdk/client-side-sdks/react-native/",
-              "sdk/client-side-sdks/flutter/",
-              "sdk/client-side-sdks/roku/"
+              {
+                "group": "JavaScript",
+                "pages": [
+                  "sdk/client-side-sdks/javascript/javascript-overview",
+                  "sdk/client-side-sdks/javascript/javascript-install",
+                  "sdk/client-side-sdks/javascript/javascript-gettingstarted",
+                  "sdk/client-side-sdks/javascript/javascript-usage",
+                  "sdk/client-side-sdks/javascript/javascript-typescript",
+                  "sdk/client-side-sdks/javascript/javascript-openfeature",
+                  "sdk/client-side-sdks/javascript/javascript-example"
+                ]
+              },
+              {
+                "group": "React",
+                "pages": [
+                  "sdk/client-side-sdks/react/react-overview",
+                  "sdk/client-side-sdks/react/react-install",
+                  "sdk/client-side-sdks/react/react-gettingstarted",
+                  "sdk/client-side-sdks/react/react-usage",
+                  "sdk/client-side-sdks/react/react-typescript",
+                  "sdk/client-side-sdks/react/react-openfeature",
+                  "sdk/client-side-sdks/react/react-example"
+                ]
+              },
+              {
+                "group": "Next.js",
+                "pages": [
+                  "sdk/client-side-sdks/nextjs/nextjs-overview",
+                  "sdk/client-side-sdks/nextjs/nextjs-install",
+                  "sdk/client-side-sdks/nextjs/nextjs-gettingstarted",
+                  "sdk/client-side-sdks/nextjs/nextjs-usage",
+                  "sdk/client-side-sdks/nextjs/nextjs-typescript",
+                  "sdk/client-side-sdks/nextjs/nextjs-openfeature",
+                  "sdk/client-side-sdks/nextjs/nextjs-example"
+                ]
+              },
+              {
+                "group": "Angular",
+                "pages": [
+                  "sdk/client-side-sdks/angular/angular-overview",
+                  "sdk/client-side-sdks/angular/angular-install",
+                  "sdk/client-side-sdks/angular/angular-gettingstarted",
+                  "sdk/client-side-sdks/angular/angular-usage",
+                  "sdk/client-side-sdks/angular/angular-typescript",
+                  "sdk/client-side-sdks/angular/angular-openfeature",
+                  "sdk/client-side-sdks/angular/angular-example"
+                ]
+              },
+              {
+                "group": "iOS",
+                "pages": [
+                  "sdk/client-side-sdks/ios/ios-overview",
+                  "sdk/client-side-sdks/ios/ios-install",
+                  "sdk/client-side-sdks/ios/ios-gettingstarted",
+                  "sdk/client-side-sdks/ios/ios-usage",
+                  "sdk/client-side-sdks/ios/ios-typescript",
+                  "sdk/client-side-sdks/ios/ios-openfeature",
+                  "sdk/client-side-sdks/ios/ios-example"
+                ]
+              },
+              {
+                "group": "Android",
+                "pages": [
+                  "sdk/client-side-sdks/android/android-overview",
+                  "sdk/client-side-sdks/android/android-install",
+                  "sdk/client-side-sdks/android/android-gettingstarted",
+                  "sdk/client-side-sdks/android/android-usage",
+                  "sdk/client-side-sdks/android/android-typescript",
+                  "sdk/client-side-sdks/android/android-openfeature",
+                  "sdk/client-side-sdks/android/android-example"
+                ]
+              },
+              {
+                "group": "React Native",
+                "pages": [
+                  "sdk/client-side-sdks/react-native/react-native-overview",
+                  "sdk/client-side-sdks/react-native/react-native-install",
+                  "sdk/client-side-sdks/react-native/react-native-gettingstarted",
+                  "sdk/client-side-sdks/react-native/react-native-usage",
+                  "sdk/client-side-sdks/react-native/react-native-typescript",
+                  "sdk/client-side-sdks/react-native/react-native-openfeature",
+                  "sdk/client-side-sdks/react-native/react-native-example"
+                ]
+              },
+              {
+                "group": "Flutter",
+                "pages": [
+                  "sdk/client-side-sdks/flutter/flutter-overview",
+                  "sdk/client-side-sdks/flutter/flutter-install",
+                  "sdk/client-side-sdks/flutter/flutter-gettingstarted",
+                  "sdk/client-side-sdks/flutter/flutter-usage",
+                  "sdk/client-side-sdks/flutter/flutter-typescript",
+                  "sdk/client-side-sdks/flutter/flutter-openfeature",
+                  "sdk/client-side-sdks/flutter/flutter-example"
+                ]
+              },
+              {
+                "group": "Roku",
+                "pages": [
+                  "sdk/client-side-sdks/roku/roku-overview",
+                  "sdk/client-side-sdks/roku/roku-install",
+                  "sdk/client-side-sdks/roku/roku-gettingstarted",
+                  "sdk/client-side-sdks/roku/roku-usage",
+                  "sdk/client-side-sdks/roku/roku-typescript",
+                  "sdk/client-side-sdks/roku/roku-openfeature",
+                  "sdk/client-side-sdks/roku/roku-example"
+                ]
+              }
             ]
           },
           {
